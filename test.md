@@ -23,7 +23,7 @@ The resulting output from the above command shows a lot of information about dif
 - Project-specific directories: These are *scratch* and *projappl* directories. Each project has 1 TB of scratch disk space by default. This diskspace is temporary space and the files that have not been used for 90 days will be  removed automatically. *Projappl* directory on the other hand can contain up to 50 GB of data and is mainly for storing and sharing compiled applications and libraries etc. with other members of the project. 
 
 
-### Perform a light-weight pre-porcesisng on data files using fast I/O local disks
+### Perform a light-weight pre-porcessing on data files using fast I/O local disks
 
 Once in a while, you come across the cases where you have to handle an uncommonly large number of smaller files that cause heavy IO load on supercomputing environment. In order to facilitate such operations, CSC has provided fast local disk areas in login and compute nodes.
 
