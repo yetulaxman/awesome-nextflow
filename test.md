@@ -69,9 +69,10 @@ Currently, all directories on scratch drive are project-based and one should be 
 ```bash
 csc-projects
 ```
-Good thing about this command is that you will also get billing units information associated with each of your project. Once you know the project number, you can move your data to a specific project directory on scratch as below:
+
+Once you know the project number, you can move your preprocessed data (i.e., Merged.fasta file) from earlier step to a specific project directory on scratch as below:
 
 ```bash
 mv Merged.fasta /scratch/project_xxx
 ```
-You have now successfully moved your data to scratch area and can start performing actual analysis using batch job scripts.
+You have now successfully moved your data to scratch area and can start performing actual analysis using batch job scripts which you will learn in-depth in different module.
