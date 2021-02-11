@@ -34,7 +34,7 @@ echo $TMPDIR
 ```
 This local disk area in login nodes is meant for some light-weight preprocessing of data before you start actual analysis on scratch drive. Let's look at the below  toy example where we can download a tar file containing thousands of  small files and then we can  merge all those files into one big file using local storage disks.
 
-1. download archive file from allas object storage
+1. Download tar file from *allas* object storage
 
 ```bash 
 cd $TMPDIR           
@@ -62,16 +62,16 @@ echo $LOCAL_SCRATCH
 ```
 When using batch job, use the environment variable $LOCAL_SCRATCH in your [batch job scripts](https://docs.csc.fi/computing/running/creating-job-scripts-puhti/#local-storage) to access the local storage on that node.
 
-### How do you navigate to different project-specific directories on scratch driver?
+### Move your preproceessed data to a project-specific scratch area before analaysis
 
-A CSC user often has multiple projects and needs to switch between different projects. Currently, all directories on scratch drive are project-based and one should be aware of a project number to find out actual path on scratch directory. While we can actually find *scratch* directories corresponding to all your project numbers using `csc-workspace`, it may not be immediately obvious to map those project numbers to metadata of your projects. You can instead use the following command to find more descriptions related to your project.
+Currently, all directories on scratch drive are project-based and one should be aware of a project number to find out actual path on scratch directory. While we can actually find *scratch* directories corresponding to all your project numbers using `csc-workspace`, it may not be immediately obvious to map those project numbers to metadata of your projects. You can instead also use the following command to find more descriptions related to your project.
 
 ```bash
 csc-projects
 ```
-Good thing about this command is that you will also get billing units information associated with each of your project. Once you know the project number, you can navigate to your project directory on scratch as below:
+Good thing about this command is that you will also get billing units information associated with each of your project. Once you know the project number, you can move your data to a specific project directory on scratch as below:
 
 ```bash
-cd /scratch/project_number
+mv Merged.fasta /scratch/project_xxx
 ```
-
+You have now successfully moved your data to scratch area and can start performing actual analysis using batch job scripts.
