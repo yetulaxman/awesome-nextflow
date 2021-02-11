@@ -2,7 +2,7 @@
 
 ## Binary and data files to share
 
-How would you share your files such as programme packages and data files to other project members on the same supercomputer (i.e., on Puhti) as well as on Mahti (i.e, another supercomputer at CSC)?
+Where would you share your files such as programme packages and data files to other project members on the same supercomputer (i.e., on Puhti) as well as on Mahti (i.e, another supercomputer at CSC)?
 
 ###  Background
 
