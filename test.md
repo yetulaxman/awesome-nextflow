@@ -25,16 +25,16 @@ tar -xavf shared_files.tar.gz
 cd shared_files
 ```
 
-Let's assume that file *Merged.fasta* is intended for computational use and *ggplot2_3.3.3_Rprogramme.tar.gz* is a software tool needed for analysis. As you know the project name, you can share file *Merged.fasta* in scratch folder and *ggplot2_3.3.3_Rprogramme.tar.gz* file in projapple directory.
+Let's assume that file *Merged.fasta* is data file intended for computational use and *ggplot2_3.3.3_Rprogramme.tar.gz* is a software tool needed for analysis.  You can now share file *Merged.fasta* in scratch folder and *ggplot2_3.3.3_Rprogramme.tar.gz* file in projapple directory.
 
 
-2. Share your *ggplot2_3.3.3_Rprogramme.tar.gz* file in *projappl* directory
+3. Share your *ggplot2_3.3.3_Rprogramme.tar.gz* file in *projappl* directory
 
 ```bash
 cp ggplot2_3.3.3_Rprogramme.tar.gz  /projapple/project_xxxx
 ````
 
-3. Share *Merged.fasta* file in *scratch* directory
+4. Share *Merged.fasta* file in *scratch* directory
 ```bash
 cp Merged.fasta /scratch/project_xxxx
 ```
@@ -45,7 +45,7 @@ Set read-only permissions for your group members for the file *Merged.fasta*:
 ```bash
 chmod -R g-w Merged.fasta
 ```
-4. sharing files in Mahti supercomputer
+5. sharing files in Mahti supercomputer
 
 you can copy *Merged.fasta* file on puhti to *scratch* drive on Mahti as below:
 
