@@ -62,7 +62,7 @@ echo $LOCAL_SCRATCH
 ```
 When using batch job, use the environment variable $LOCAL_SCRATCH in your [batch job scripts](https://docs.csc.fi/computing/running/creating-job-scripts-puhti/#local-storage) to access the local storage on that node.
 
-### Move your preproceessed data to a project-specific scratch area before analaysis
+### Move your pre-proceessed data to a project-specific scratch area before analaysis
 
 Currently, all directories on scratch drive are project-based and one should be aware of a project number to find out actual path on scratch directory. While we can actually find *scratch* directories corresponding to all your project numbers using `csc-workspace`, it may not be immediately obvious to map those project numbers to metadata of your projects. You can instead also use the following command to find more descriptions related to your project.
 
