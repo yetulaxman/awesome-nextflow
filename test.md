@@ -53,9 +53,9 @@ find . -name 'individual.fasta*' | xargs cat  >> Merged.fasta
 find . -name 'individual.fasta*' | xargs rm
 ```
 
-However, if you are going to perform heavy-weight computing tasks on those larger number of smaller files, you have to use local storage areas in compute nodes which are accessed either interactively or using batch jobs.
+However, if you are going to perform heavy-weight computing tasks on those larger number of smaller files, you have to use local storage areas in compute nodes which are accessed either [interactively](https://docs.csc.fi/computing/running/interactive-usage/) or using [batch jobs](https://docs.csc.fi/computing/running/creating-job-scripts-puhti).
 
-In the [interactive jobs](https://docs.csc.fi/computing/running/interactive-usage/), use the following command to find out a local storage area in that compute node:
+In the interactive jobs, use the following command to find out a local storage area in that compute node:
 
 ```bash
 echo $LOCAL_SCRATCH 
