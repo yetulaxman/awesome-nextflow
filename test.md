@@ -9,7 +9,7 @@ Upon completion of this tutorial, you will get familiar with:
 - Personal and project-specific disk areas and their quotas in CSC supercomputing environment
 - Ideal disk areas for large IO operations
 
-### How do you identify your personal and project-specific directories in Puhti and Mahti supercomputers?
+### Identify your personal and project-specific directories in Puhti and Mahti supercomputers
 
 Each user at CSC supercomputer (Puhti or Mahti) owns different disk areas (or directories), each one with a specific purpose. You can get familiar with the directories by issuing the following command in login node:
 
@@ -23,7 +23,7 @@ The resulting output from the above command shows a lot of information about dif
 - Project-specific directories: These are *scratch* and *projappl* directories. Each project has 1 TB of scratch disk space by default. This diskspace is temporary space and the files that have not been used for 90 days will be  removed automatically. *Projappl* directory on the other hand can contain up to 50 GB of data and is mainly for storing and sharing compiled applications and libraries etc. with other members of the project. 
 
 
-### What would be the ideal disk space for large-scale I/O operations in CSC computing environment?
+### Perform a light-weight pre-porcesisng on data files using fast I/O local disks
 
 Once in a while, you come across the cases where you have to handle an uncommonly large number of smaller files that cause heavy IO load on supercomputing environment. In order to facilitate such operations, CSC has provided fast local disk areas in login and compute nodes.
 
@@ -32,7 +32,28 @@ In order to identify such directories in login nodes in Puhti/Maht, use the foll
 ```bash
 echo $TMPDIR
 ```
-This space for example be useful for pre-and post-processing of large files. However, if you are going to do some computing tasks on those larger number of smaller files, we will use local storage areas in compute nodes which are accessed either interactively or using batch jobs.
+This local disk area in login nodes is meant for some light-weight preprocessing of data before you start actual analysis on scratch drive. Let's look at the below  toy example where we can download a tar file containing thousands of  small files and then we can  merge all those files into one big file using local storage disks.
+
+1. download archive file from allas object storage
+
+```bash 
+cd $TMPDIR           
+wget https://a3s.fi/CSC_training/Individual_files.tar.gz
+```
+2. Unpack the downloaded tar file
+
+```
+tar -xavf Individual_files.tar.gz
+cd Individual_files
+```
+3. Merge all those small files into one file and remove all small files
+
+```
+find . -name 'individual.fasta*' | xargs cat  >> Merged.fasta
+find . -name 'individual.fasta*' | xargs rm
+```
+
+However, if you are going to perform heavy-weight computing tasks on those larger number of smaller files, you have to use local storage areas in compute nodes which are accessed either interactively or using batch jobs.
 
 In the [interactive jobs](https://docs.csc.fi/computing/running/interactive-usage/), use the following command to find out a local storage area in that compute node:
 
