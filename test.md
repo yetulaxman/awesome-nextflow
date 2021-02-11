@@ -2,7 +2,7 @@
 
 ## Binary and data files to share
 
-Imagine that you have a data file and software binary (e.g., data.txt and softwareA_binary) on your Puhti home directory and  also have a shared project (e.g., project_1234) on Puhti and Mahti. How would you safely share your files to other project members on the same supercomputer (i.e., on Puhti) as well as on Mahti (i.e, another supercomputer at CSC)?
+Imagine that you have a data file and software binary (e.g., data.txt and softwareA_binary) on your Puhti home directory and  also have a shared project (e.g., project_xxxx) on Puhti and Mahti. How would you safely share your files to other project members on the same supercomputer (i.e., on Puhti) as well as on Mahti (i.e, another supercomputer at CSC)?
 
 ###  Background
 
@@ -20,12 +20,12 @@ Authenticate using the password associated with CSC user account. Once your logi
 2. Share your *softwareA_binary* file in *projappl* directory
 
 ```bash
-cp softwareA_binary  /projapple/project_1234
+cp softwareA_binary  /projapple/project_xxxx
 ````
 
 3. Share *data.txt* file in *scratch* directory
 ```bash
-cp data.txt /scratch/project_1234
+cp data.txt /scratch/project_xxxx
 ```
 All new files and directories are also fully accessible for other group members (including read, write and execution permissions). If you want to restrict access from your group members, you can reset the permissions with *chmod* command.
 
@@ -39,11 +39,11 @@ chmod -R g-w data.txt
 you can copy *data.txt* file on puhti to *scratch* drive on Mahti as below:
 
 ```bash
-rsync -P data.txt <username>@mahti.csc.fi:/scratch/project_1234
+rsync -P data.txt <username>@mahti.csc.fi:/scratch/project_xxxx
 ```
 you can copy *sofwtareA_binary* file on puhti to *projapple* directory on Mahti as below:
 
 ```bash
-rsync -P sofwtareA_binary <username>@mahti.csc.fi:/scratch/project_1234
+rsync -P sofwtareA_binary <username>@mahti.csc.fi:/scratch/project_xxxx
 ```
 
