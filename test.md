@@ -1,79 +1,49 @@
----
-title: Disk areas in CSC supercomputing environment
----
+# Where to put files in CSC environment?
 
-## Learning Objectives
-CSC users working at supercomputing environment have been granted with different disk areas (or directories) to manage their data in supercomputers. It is therefore important to understand your disk areas to manage personal and project-specific data.
+## Binary and data files to share
 
-Upon completion of this tutorial, you will get familiar with:
-- Personal and project-specific disk areas and their quotas in CSC supercomputing environment
-- Ideal disk areas for large IO operations
+Imagine that you have a data file and software binary (e.g., data.txt and softwareA_binary) on your Puhti home directory and  also have a shared project (e.g., project_1234) on Puhti and Mahti. How would you safely share your files to other project members on the same supercomputer (i.e., on Puhti) as well as on Mahti (i.e, another supercomputer at CSC)?
 
-### Identify your personal and project-specific directories in Puhti and Mahti supercomputers
+###  Background
 
-Each user at CSC supercomputer (Puhti or Mahti) owns different disk areas (or directories), each one with a specific purpose. You can get familiar with the directories by issuing the following command in login node:
+This exercise is aimed at familiarising yourself with main disc areas in Puhti and Mahti supercomputers. Data files needed for computational analysis should be stored and shared in *scratch* directories and any software compilations and binaries should be shared in *proappl* directory. In order to find actual directories use commands such as `csc-workspaces` and `csc-projects`. Data transfer between two supercomputers can be done with many tools including `rsync`. In this example try to avoid using *allas* for data transfer between the supercomupters. 
 
-```bash
-csc-workspaces 
-```
-The resulting output from the above command shows a lot of information about different directories and their current quota. Briefly, these directories are as below:
+### Solution
 
-- User-specific directory: It is your home directory ($HOME) which can contain up to 10 GB of data by default. It is also the default directory when you login to Puhti/Mahti. You can store configuration files and other minor personal data. 
-
-- Project-specific directories: These are *scratch* and *projappl* directories. Each project has 1 TB of scratch disk space by default. This diskspace is temporary space and the files that have not been used for 90 days will be  removed automatically. *Projappl* directory on the other hand can contain up to 50 GB of data and is mainly for storing and sharing compiled applications and libraries etc. with other members of the project. 
-
-
-### Perform a light-weight pre-porcessing on data files using fast I/O local disks
-
-Once in a while, you come across the cases where you have to handle an uncommonly large number of smaller files that cause heavy IO load on supercomputing environment. In order to facilitate such operations, CSC has provided fast local disk areas in login and compute nodes.
-
-In order to identify such directories in login nodes in Puhti/Maht, use the following command:
+1. First login to Puhti supecomputer using *ssh* command as below:
 
 ```bash
-echo $TMPDIR
+ssh <username>@puhti.csc.fi
 ```
-This local disk area in login nodes is meant for some light-weight preprocessing of data before you start actual analysis on scratch drive. Let's look at the below  toy example where we can download a tar file containing thousands of  small files and then we can  merge all those files into one big file using local storage disks.
+Authenticate using the password associated with CSC user account. Once your login to Puhti is successful, Linux terminal will be opened for command-line interaction in your home directory. Let's assume that file *data.txt* is intended for computational use and *softwareA_binary* is a software tool needed for analysis. As you know the project name, you can share file *data.txt* in scratch folder and *softwareA_binary* file in projapple directory.
 
-1. Download tar file from *allas* object storage
-
-```bash 
-cd $TMPDIR           
-wget https://a3s.fi/CSC_training/Individual_files.tar.gz
-```
-2. Unpack the downloaded tar file
-
-```
-tar -xavf Individual_files.tar.gz
-cd Individual_files
-```
-3. Merge all those small files into one file and remove all small files
-
-```
-find . -name 'individual.fasta*' | xargs cat  >> Merged.fasta
-find . -name 'individual.fasta*' | xargs rm
-```
-
-However, if you are going to perform heavy-weight computing tasks on those larger number of smaller files, you have to use local storage areas in compute nodes which are accessed either [interactively](https://docs.csc.fi/computing/running/interactive-usage/) or using [batch jobs](https://docs.csc.fi/computing/running/creating-job-scripts-puhti).
-
-In the interactive jobs, use the following command to find out a local storage area in that compute node:
+2. Share your *softwareA_binary* file in *projappl* directory
 
 ```bash
-echo $LOCAL_SCRATCH 
+cp softwareA_binary  /projapple/project_1234
+````
+
+3. Share *data.txt* file in *scratch* directory
+```bash
+cp data.txt /scratch/project_1234
 ```
-When using batch job, use the environment variable $LOCAL_SCRATCH in your [batch job scripts](https://docs.csc.fi/computing/running/creating-job-scripts-puhti/#local-storage) to access the local storage on that node.
+All new files and directories are also fully accessible for other group members (including read, write and execution permissions). If you want to restrict access from your group members, you can reset the permissions with *chmod* command.
 
-### Move your pre-proceessed data to a project-specific scratch area before analaysis
-
-Currently, all directories on scratch drive are project-based and one should be aware of a project number to find out actual path on scratch directory. While we can actually find *scratch* directories corresponding to all your project numbers using `csc-workspace`, it may not be immediately obvious to map those project numbers to metadata of your projects. You can instead also use the following command to find more details on your project(s).
+Set read-only permissions for your group members for the file *data.txt*:
 
 ```bash
-csc-projects
+chmod -R g-w data.txt
 ```
+4. sharing files in Mahti supercomputer
 
-Once you know the project number which would be in the form of project_xxx, you can move your pre-processed data (i.e., Merged.fasta file) from earlier step to a project-specific directory on scratch area as below:
+you can copy *data.txt* file on puhti to *scratch* drive on Mahti as below:
 
 ```bash
-mkdir /scratch/project_xxx/$USER
-mv Merged.fasta /scratch/project_xxx/$USER
+rsync -P data.txt <username>@mahti.csc.fi:/scratch/project_1234
 ```
-You have now successfully moved your data to scratch area and can start performing actual analysis using batch job scripts which you will learn in-depth in different module.
+you can copy *sofwtareA_binary* file on puhti to *projapple* directory on Mahti as below:
+
+```bash
+rsync -P sofwtareA_binary <username>@mahti.csc.fi:/scratch/project_1234
+```
+
