@@ -6,15 +6,8 @@ How would you share your files such as programme packages and data files to othe
 
 ###  Background
 
-This exercise is aimed at familiarising yourself with main disk areas in Puhti and Mahti supercomputers. Data files needed for computational analysis should be stored and shared in *scratch* directories and any software compilations and binaries should be shared in *proappl* directory. In order to find actual directories use commands such as `csc-workspaces` and `csc-projects`. Data transfer between two supercomputers can be done with many tools including `rsync`. In this example try to avoid using *allas* for data transfer between the supercomputers. 
+This exercise is aimed at familiarising yourself with main disk areas in Puhti and Mahti supercomputers. Data files needed for computational analysis should be stored and shared in *scratch* directories and any software compilations and binaries should be shared in *proappl* directory. In order to find actual directories use commands such as `csc-workspaces` and `csc-projects`. Data transfer between two supercomputers can be done with many tools including `rsync`. In this example try to avoid using *allas* for data transfer between the supercomputers. You may download example programme package (i.e.,ggplot2_3.3.3_Rprogramme.tar.gz) and data file (i.e., Merged.fasta) from **allas** object storage available at https://a3s.fi/CSC_training/shared_files.tar.gz
 
-**TIP:**
-You may download example programme package (i.e.,ggplot2_3.3.3_Rprogramme.tar.gz) and data file (i.e., Merged.fasta) from **allas** object storage as below:
-
-```bash
-wget https://a3s.fi/CSC_training/shared_files.tar.gz
-cd shared_files
-```
 ### Solution
 
 1. First login to Puhti supecomputer using *ssh* command as below:
